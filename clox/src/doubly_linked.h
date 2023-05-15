@@ -1,17 +1,17 @@
 #ifndef _DOUBLY_LINKED_H
 #define _DOUBLY_LINKED_H
 
-typedef struct dnode
+typedef struct dlnode
 {
-	dnode *prev;
-	dnode *next;
+	struct dlnode *prev;
+	struct dlnode *next;
 	void *val;
-} dnode;
+} dlnode;
 
-dnode *create_list();
-void destroy_list(dnode*);
-int insert(dnode *, void *);
-dnode *find(dnode*, void *);
-int delete(dnode *);
+dlnode *dlcreate();
+void dldestroy(dlnode*);
+int dlinsert(dlnode *, void *);
+dlnode *dlfind(dlnode *, void *);
+int dlremove(dlnode *, void *);
 
 #endif
