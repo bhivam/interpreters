@@ -83,8 +83,36 @@ fn();
 In this case inner gets a local variable declared outside of it. this means inner holds onto references to any surrounding variables that it uses so that they stay around even after the outer function has retured. **What happens if we declare it and then we change the value of the variable. Does the call before and after the change have different behaviour** A function like inner is called a closure. Now variable scopes are not a simple stack where local variables of a function can be disregarded once the function returns. 
 
 ### Classes
+Objects can be very useful for bundling various data together and then scoping functions relating to the object on that object so that naming schemes aren't annoying.
 
+#### Classes versus Prototypes
+The class implementation of objects is more common than the prototype implementation. You can create instances from the classes which have the data and state of the object and link back to the class which contains the objects inheritence chain and methods. 
 
+Prototype based OOP will merge classes and instances. There will only be objects and objects contain state and methods. They can direcly inherit from each other or delegate to each other. Since they directly delegate to eachother, objects in a prototypical system can have very unusual patterns and people will generally just use them like classes anyways. But there is more flexibility if there is something specific you want to achieve. 
 
+#### Classes in Lox
+```
+class Breakfast {
+    cook() {
+        print "Eggs are frying";
+    }
+
+    serve(who) {
+        print "enjoy your breakfast " + who + ".";
+    }
+}
+```
+This pretty much explains how to instantiate a class and its methods. Classes are also first class. So they can be passed to functions and assigned to variables. 
+
+#### Instantiation and Initialization
+We will be able to add any properties we want onto objects. We can access this within our methods by using the this keyword. There is an init function that will take in some parameters so that we can use them to initialize some fields.
+
+#### Inheritance
+We can create subclasses that will inherit every method definition in it super class. We can also define our own init function in the subclass, overriding the other init from the super class. But we can call the super class's init with super.init.
+
+Lox is not a true OOP. *Maybe as an exercise I can change the primitives to also be objects with functions.*
+
+#### Standard Library
+*As an exercise add in string manipulation, trigonometric functions, file I/O, networking, reading input from the user.
 
 
