@@ -12,4 +12,9 @@ JCTF := -d $(OUT_DIR)/ -cp $(TOOL_DIR)/
 
 jlox: $(SRCS) $(TOOL)
 	$(JC) $(JCFLAGS) $(SRCS)
+	java lox.Lox $(SRC_CODE)
+
+genast: $(TOOL)
 	$(JC) $(JCTF) $(TOOL)
+	java tool.GenerateAst lox
+

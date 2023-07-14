@@ -15,11 +15,18 @@ public class GenerateAst {
     }
     String outputDir = args[0];
     defineAst(outputDir, "Expr", Arrays.asList(
-      "Binary   : Expr left, Token operator, Expr right",
-      "Grouping : Expr expression",
-      "Literal  : Object value",
-      "Unary    : Token operator, Expr right"
-    ));
+        "Assign   : Token name, Expr value",
+        "Binary   : Expr left, Token operator, Expr right",
+        "Ternary  : Expr left, Token op1, Expr mid, Token op2, Expr right",
+        "Grouping : Expr expression",
+        "Literal  : Object value",
+        "Unary    : Token operator, Expr right",
+        "Variable : Token name"));
+
+    defineAst(outputDir, "Stmt", Arrays.asList(
+        "Expression : Expr expression",
+        "Print      : Expr expression",
+        "Var        : Token name, Expr initializer"));
   }
 
   private static void defineAst(String outputDir, String baseName, List<String> types) throws IOException {
@@ -43,13 +50,11 @@ public class GenerateAst {
     writer.println();
     writer.println("  abstract <R> R accept(Visitor<R> visitor);");
 
-
     writer.println("}");
     writer.close();
   }
 
-  private static void defineVisitor(
-      PrintWriter writer, String baseName, List<String> types) {
+  private static void defineVisitor(PrintWriter writer, String baseName, List<String> types) {
     writer.println("  interface Visitor<R> {");
 
     for (String type : types) {
@@ -67,7 +72,7 @@ public class GenerateAst {
     writer.println("    " + className + "(" + fieldList + ") {");
 
     String[] fields = fieldList.split(", ");
-    for (String field: fields) {
+    for (String field : fields) {
       String name = field.split(" ")[1];
       writer.println("      this." + name + " = " + name + ";");
     }
@@ -88,4 +93,3 @@ public class GenerateAst {
     writer.println("  }");
   }
 }
-
